@@ -71,34 +71,34 @@
             opacity: 0;
             transition: opacity 1s ease-in;
             min-height: 100vh;
-            padding: 50px 10px;
+            padding: 40px 10px;
             text-align: center;
         }
         .content-visible { opacity: 1 !important; }
 
         /* GERİ SAYIM */
         .countdown-section {
-            margin-bottom: 40px;
-            padding-bottom: 25px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .countdown-title {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             opacity: 0.5;
         }
         #timer { display: flex; justify-content: center; gap: 15px; }
-        .timer-unit span { display: block; font-size: 1.5rem; font-family: 'Cormorant Garamond', serif; }
-        .timer-unit label { font-size: 0.5rem; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+        .timer-unit span { display: block; font-size: 1.4rem; font-family: 'Cormorant Garamond', serif; }
+        .timer-unit label { font-size: 0.45rem; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
-        /* İSİMLER */
+        /* İSİMLER VE ÖZEL SÖZ DÜZENİ */
         .names {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.6rem;
             font-weight: 300;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             margin: 0;
             text-transform: uppercase;
         }
@@ -106,24 +106,34 @@
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
             font-size: 1.8rem;
-            margin: 5px 0;
+            margin: 2px 0;
             display: block;
         }
+        
+        .quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin: 25px auto 45px;
+            max-width: 400px;
+            line-height: 1.7;
+            font-weight: 300;
+            opacity: 0.95;
+            text-align: center;
+        }
 
-        /* AİLE İSİMLERİ - EĞİK ÇİZGİLİ VE SIKI DÜZEN */
+        /* AİLE İSİMLERİ */
         .family-section {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 50px 0;
-            gap: 15px; /* Çizgi ve isimler arasındaki ideal mesafe */
+            margin: 40px 0;
+            gap: 12px;
         }
-
         .family-box {
             text-align: center;
-            min-width: 135px;
+            min-width: 140px;
         }
-
         .family-names-text {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
@@ -133,7 +143,6 @@
             display: block;
             margin-bottom: 2px;
         }
-
         .family-surname-text {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
@@ -143,22 +152,19 @@
             display: block;
             text-transform: uppercase;
         }
-
-        /* EĞİK ÇİZGİ */
         .family-divider-slanted {
             width: 1px;
-            height: 40px;
+            height: 35px;
             background: rgba(255,255,255,0.3);
-            transform: rotate(20deg); /* İstediğin o eğik duruş */
+            transform: rotate(20deg);
             flex-shrink: 0;
-            margin: 0 5px;
         }
 
         /* ETKİNLİK ALANI */
         .event-row { 
             display: flex; 
             justify-content: center; 
-            margin: 40px auto; 
+            margin: 35px auto; 
             max-width: 600px; 
         }
         .event-box { flex: 1; padding: 0 5px; }
@@ -180,7 +186,7 @@
         .date-time { font-weight: 200; font-size: 0.7rem; line-height: 1.5; opacity: 0.7; }
 
         /* BUTONLAR */
-        .actions { display: flex; flex-direction: column; gap: 10px; margin: 40px auto 0; max-width: 220px; }
+        .actions { display: flex; flex-direction: column; gap: 10px; margin: 30px auto 0; max-width: 220px; }
         .btn { 
             border: 1px solid rgba(255,255,255,0.2); 
             color: var(--white); 
@@ -191,12 +197,10 @@
             text-transform: uppercase; 
             transition: 0.4s; 
         }
-        .btn:hover { background: var(--white); color: var(--bg-color); }
 
-        @media (max-width: 380px) {
-            .family-box { min-width: 120px; }
-            .family-names-text { font-size: 0.75rem; }
-            .family-surname-text { font-size: 0.95rem; letter-spacing: 4px; }
+        @media (max-width: 400px) {
+            .names { font-size: 2.2rem; }
+            .quote { font-size: 1rem; line-height: 1.6; }
         }
     </style>
 </head>
@@ -226,9 +230,14 @@
             <h1 class="names">SEVİM ELA</h1>
             <span class="ampersand">&</span>
             <h1 class="names">RAMAZAN</h1>
+            
+            <div class="quote">
+                “Aşkımızı bir ömre dönüştürdüğümüz bu anlamlı günde,<br>
+                mutluluğumuzu sizinle paylaşmak<br>
+                istiyoruz.”
+            </div>
         </div>
 
-        <!-- AİLE İSİMLERİ - EĞİK ÇİZGİLİ SON HALİ -->
         <div class="family-section">
             <div class="family-box">
                 <span class="family-names-text">ÜMMÜGÜL & MEHMET</span>
@@ -259,13 +268,19 @@
                     29 Ağustos 2026 <br> 
                     Cumartesi | 19:00 <br>
                     <span style="display:block; margin-top:5px;">Pınar Düğün Salonu Havuzlu Bahçe</span>
+                    <span style="display:block; margin-top:10px; font-style: italic; font-size: 0.6rem; opacity: 0.9;">
+                        Not: (Damat evinde saat 15:00' da yemek verilecektir.)
+                    </span>
                 </div>
             </div>
         </div>
 
         <div class="actions">
-            <a href="https://maps.google.com" target="_blank" class="btn">Kına Konumu</a>
-            <a href="https://maps.google.com" target="_blank" class="btn">Düğün Konumu</a>
+            <!-- Kına Konumu Bağlantısı -->
+            <a href="https://www.google.com/maps/place/Yal%C4%B1m+Garden+K%C4%B1r+D%C3%BC%C4%9F%C3%BCn+Salonu/@38.5052082,27.2155832,682m/data=!3m2!1e3!4b1!4m6!3m5!1s0x14b97d797be87d9f:0x797697319b087202!8m2!3d38.5052082!4d27.2181581!16s%2Fg%2F11f7b_bsqm?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn">Kına Konumu</a>
+            
+            <!-- Güncellenen Düğün Konumu Bağlantısı -->
+            <a href="https://www.google.com/maps/place/P%C4%B1nar+D%C3%BC%C4%9F%C3%BCn+Salonu/@38.4275817,27.2621822,682m/data=!3m2!1e3!4b1!4m6!3m5!1s0x14b97d2267f4bbd9:0x50b7e5e05596a70f!8m2!3d38.4275817!4d27.2647571!16s%2Fg%2F11rkldvnz1?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn">Düğün Konumu</a>
         </div>
     </div>
 
