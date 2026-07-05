@@ -29,10 +29,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 100;
-            transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1), opacity 1s;
+            z-index: 9999;
+            transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.8s;
             cursor: pointer;
         }
+        .cover-hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 
         .monogram-seal {
             position: relative;
@@ -42,17 +43,14 @@
             justify-content: center;
             align-items: center;
         }
-
         .char {
             font-family: 'Cormorant Garamond', serif;
             font-size: 110px;
             color: var(--white);
             position: absolute;
             line-height: 1;
-            user-select: none;
             font-weight: 300;
         }
-
         .char-r { transform: translate(-22px, -18px); z-index: 2; }
         .char-e { transform: translate(18px, 18px); z-index: 1; }
 
@@ -63,40 +61,27 @@
             letter-spacing: 5px;
             font-size: 0.6rem;
             text-transform: uppercase;
-            white-space: nowrap;
             opacity: 0.5;
             animation: pulse 2s infinite;
         }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.7; }
-        }
+        @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.7; } }
 
         /* ANA İÇERİK */
         #main-content {
-            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in;
             min-height: 100vh;
-            padding: 40px 25px 80px;
+            padding: 50px 10px;
             text-align: center;
-            background: var(--bg-color);
         }
-
-        .reveal { opacity: 0; transform: translateY(30px); }
-        .active .reveal { animation: revealUp 1.2s forwards; }
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.5s; }
-        .delay-3 { animation-delay: 0.8s; }
-
-        @keyframes revealUp { to { opacity: 1; transform: translateY(0); } }
+        .content-visible { opacity: 1 !important; }
 
         /* GERİ SAYIM */
         .countdown-section {
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             padding-bottom: 25px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        
         .countdown-title {
             font-size: 0.6rem;
             letter-spacing: 4px;
@@ -104,154 +89,119 @@
             margin-bottom: 15px;
             opacity: 0.5;
         }
-
-        #timer { display: flex; justify-content: center; gap: 20px; }
-        .timer-unit span { display: block; font-size: 1.6rem; font-family: 'Cormorant Garamond', serif; }
+        #timer { display: flex; justify-content: center; gap: 15px; }
+        .timer-unit span { display: block; font-size: 1.5rem; font-family: 'Cormorant Garamond', serif; }
         .timer-unit label { font-size: 0.5rem; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
         /* İSİMLER */
         .names {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
+            font-size: 2.6rem;
             font-weight: 300;
             letter-spacing: 3px;
             margin: 0;
             text-transform: uppercase;
         }
-
         .ampersand {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin: 5px 0;
             display: block;
         }
 
-        .quote {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-            margin: 30px auto;
-            max-width: 320px;
-            line-height: 1.6;
-            font-weight: 300;
-            opacity: 0.9;
-        }
-
-        /* AİLE İSİMLERİ */
-        .family-bridge {
+        /* AİLE İSİMLERİ - EĞİK ÇİZGİLİ VE SIKI DÜZEN */
+        .family-section {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 50px 0 30px 0;
-            gap: 15px;
+            margin: 50px 0;
+            gap: 15px; /* Çizgi ve isimler arasındaki ideal mesafe */
         }
 
-        .family-name {
-            font-family: 'Playfair Display', serif;
+        .family-box {
+            text-align: center;
+            min-width: 135px;
+        }
+
+        .family-names-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            opacity: 0.85;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .family-surname-text {
+            font-family: 'Cormorant Garamond', serif;
             font-style: italic;
             font-size: 1.1rem;
             font-weight: 400;
-            color: var(--white);
-            letter-spacing: 4px;
-            white-space: nowrap;
-            opacity: 0.85;
+            letter-spacing: 5px;
+            display: block;
             text-transform: uppercase;
         }
 
-        .diagonal-line {
-            width: 30px;
-            height: 1px;
-            background: rgba(255,255,255,0.2);
-            transform: rotate(-45deg);
+        /* EĞİK ÇİZGİ */
+        .family-divider-slanted {
+            width: 1px;
+            height: 40px;
+            background: rgba(255,255,255,0.3);
+            transform: rotate(20deg); /* İstediğin o eğik duruş */
+            flex-shrink: 0;
+            margin: 0 5px;
         }
 
         /* ETKİNLİK ALANI */
         .event-row { 
             display: flex; 
             justify-content: center; 
-            align-items: stretch; 
-            margin: 30px auto 40px; 
+            margin: 40px auto; 
             max-width: 600px; 
         }
-        
-        .event-box { flex: 1; padding: 0 10px; }
-        
+        .event-box { flex: 1; padding: 0 5px; }
         .event-divider {
             width: 1px;
-            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent);
             margin: 0 5px;
         }
-
         .event-title { 
             font-family: 'Cormorant Garamond', serif; 
-            font-size: 1.3rem; 
+            font-size: 1.2rem; 
             letter-spacing: 2px; 
             text-transform: uppercase; 
-            margin-bottom: 8px; 
-            font-weight: 400; 
+            margin-bottom: 8px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             display: inline-block;
-            padding-bottom: 3px;
+            padding-bottom: 2px;
         }
-
-        .date-time { 
-            font-weight: 200; 
-            font-size: 0.75rem; 
-            line-height: 1.6; 
-            opacity: 0.8;
-            margin-top: 10px;
-        }
-
-        .address-line {
-            display: block;
-            margin-top: 8px;
-            font-style: italic;
-            font-weight: 300;
-            font-size: 0.7rem;
-            opacity: 0.7;
-        }
-
-        .food-note {
-            font-size: 0.6rem; 
-            opacity: 0.5; 
-            display: block; 
-            margin-top: 8px;
-            font-style: italic;
-            line-height: 1.3;
-        }
+        .date-time { font-weight: 200; font-size: 0.7rem; line-height: 1.5; opacity: 0.7; }
 
         /* BUTONLAR */
-        .actions { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px; 
-            margin: 0 auto; 
-            max-width: 250px; 
-        }
+        .actions { display: flex; flex-direction: column; gap: 10px; margin: 40px auto 0; max-width: 220px; }
         .btn { 
-            border: 1px solid rgba(255,255,255,0.3); 
+            border: 1px solid rgba(255,255,255,0.2); 
             color: var(--white); 
-            padding: 14px; 
+            padding: 12px; 
             text-decoration: none; 
-            font-size: 0.65rem; 
+            font-size: 0.6rem; 
             letter-spacing: 2px; 
             text-transform: uppercase; 
             transition: 0.4s; 
-            background: transparent;
         }
         .btn:hover { background: var(--white); color: var(--bg-color); }
 
-        @media (max-width: 400px) {
-            .names { font-size: 2.3rem; }
-            .family-name { font-size: 0.9rem; letter-spacing: 2px; }
-            .date-time { font-size: 0.7rem; }
+        @media (max-width: 380px) {
+            .family-box { min-width: 120px; }
+            .family-names-text { font-size: 0.75rem; }
+            .family-surname-text { font-size: 0.95rem; letter-spacing: 4px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- GİRİŞ EKRANI -->
     <div id="cover" onclick="openInvitation()">
         <div class="monogram-seal">
             <div class="char char-r">R</div>
@@ -260,11 +210,9 @@
         </div>
     </div>
 
-    <!-- ANA İÇERİK -->
     <div id="main-content">
         
-        <!-- 1. GERİ SAYIM -->
-        <div class="countdown-section reveal delay-1">
+        <div class="countdown-section">
             <div class="countdown-title">Büyük Güne Kalan Zaman</div>
             <div id="timer">
                 <div class="timer-unit"><span id="days">00</span><label>Gün</label></div>
@@ -274,69 +222,58 @@
             </div>
         </div>
 
-        <!-- 2. İSİMLER -->
-        <div class="reveal delay-2">
+        <div>
             <h1 class="names">SEVİM ELA</h1>
             <span class="ampersand">&</span>
             <h1 class="names">RAMAZAN</h1>
         </div>
 
-        <!-- 3. SÖZ -->
-        <div class="quote reveal delay-2">
-            “Aşkımızı bir ömre dönüştürdüğümüz bu anlamlı günde, mutluluğumuzu sizinle paylaşmak istiyoruz.”
+        <!-- AİLE İSİMLERİ - EĞİK ÇİZGİLİ SON HALİ -->
+        <div class="family-section">
+            <div class="family-box">
+                <span class="family-names-text">ÜMMÜGÜL & MEHMET</span>
+                <span class="family-surname-text">AKAR</span>
+            </div>
+            
+            <div class="family-divider-slanted"></div>
+
+            <div class="family-box">
+                <span class="family-names-text">GÜLCAN & AHMET</span>
+                <span class="family-surname-text">ÇELEBİ</span>
+            </div>
         </div>
 
-        <!-- 4. AİLE İSİMLERİ -->
-        <div class="family-bridge reveal delay-3">
-            <div class="family-name">AKAR AİLESİ</div>
-            <div class="diagonal-line"></div>
-            <div class="family-name">ÇELEBİ AİLESİ</div>
-        </div>
-
-        <!-- 5. ETKİNLİK ALANI -->
-        <div class="event-row reveal delay-3">
+        <div class="event-row">
             <div class="event-box">
                 <div class="event-title">Kına</div>
                 <div class="date-time">
                     27 Ağustos 2026 <br> 
                     Perşembe | 19:00 <br>
-                    <span class="address-line">Adres: Yalım Garden Kır Düğün Salonu</span>
+                    <span style="display:block; margin-top:5px;">Yalım Garden Kır Düğün Salonu</span>
                 </div>
             </div>
-
             <div class="event-divider"></div>
-
             <div class="event-box">
                 <div class="event-title">Düğün</div>
                 <div class="date-time">
                     29 Ağustos 2026 <br> 
                     Cumartesi | 19:00 <br>
-                    <span class="address-line">Adres: Pınar Düğün Salonu Havuzlu Bahçe</span>
-                    <span class="food-note">(Damat Evinde 15:00'da yemek verilecektir.)</span>
+                    <span style="display:block; margin-top:5px;">Pınar Düğün Salonu Havuzlu Bahçe</span>
                 </div>
             </div>
         </div>
 
-        <!-- 6. BUTONLAR -->
-        <div class="actions reveal delay-3">
-            <a href="https://www.google.com/maps/place/Yal%C4%B1m+Garden+K%C4%B1r+D%C3%BC%C4%9F%C3%BCn+Salonu/@38.5052082,27.2181581,682m/data=!3m2!1e3!4b1!4m6!3m5!1s0x14b97d797be87d9f:0x797697319b087202!8m2!3d38.5052082!4d27.2181581!16s%2Fg%2F11f7b_bsqm?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn">Kına Konumu</a>
-            
-            <a href="https://www.google.com/maps/place/P%C4%B1nar+D%C3%BC%C4%9F%C3%BCn+Salonu/@38.4275528,27.2646005,682m/data=!3m1!1e3!4m15!1m8!3m7!1s0x14b97d2267f4bbd9:0x50b7e5e05596a70f!2zUMSxbmFyIETDvMSfw7xuIFNhbG9udQ!8m2!3d38.4275817!4d27.2647571!10e5!16s%2Fg%2F11rkldvnz1!3m5!1s0x14b97d2267f4bbd9:0x50b7e5e05596a70f!8m2!3d38.4275817!4d27.2647571!16s%2Fg%2F11rkldvnz1?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn">Düğün Konumu</a>
+        <div class="actions">
+            <a href="https://maps.google.com" target="_blank" class="btn">Kına Konumu</a>
+            <a href="https://maps.google.com" target="_blank" class="btn">Düğün Konumu</a>
         </div>
     </div>
 
     <script>
         function openInvitation() {
-            const cover = document.getElementById('cover');
-            cover.style.transform = 'translateY(-100%)';
-            
-            setTimeout(() => {
-                cover.style.display = 'none';
-                const content = document.getElementById('main-content');
-                content.style.display = 'block';
-                document.body.classList.add('active');
-                startTimer();
-            }, 1000);
+            document.getElementById('cover').classList.add('cover-hidden');
+            document.getElementById('main-content').classList.add('content-visible');
+            startTimer();
         }
 
         function startTimer() {
